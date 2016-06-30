@@ -13,7 +13,7 @@ class ListSpec extends Specification { def is = s2"""
    (2 + 3 + 0) * 4 = 20                   $e6
    [1, 2, 3] drops 1 = [2, 3]             $e7
    [1] drops 3 = Nil                      $e8
-   [0, 2, 4] filters by 'x > 0' = [2, 4]  $e9
+   [-1, -2, 4] dropWhile 'x < 0' = [4]    $e9
   """
 
   def e1 = List.sum(List(1, 2)) must_== 3
@@ -24,6 +24,6 @@ class ListSpec extends Specification { def is = s2"""
   def e6 = List.product(List(List.sum(List(2, 3, 0)), 4)) must_== 20
   def e7 = List.drop(List(1, 2, 3), 1) must_== List(2, 3)
   def e8 = List.drop(List(1), 3) must_== Nil
-  def gtZero(i: Int) = i > 0
-  def e9 = List.dropWhile(List(0, 2, 4), gtZero) must_== List(2, 4)
+  def minus(i: Int) = i < 0
+  def e9 = List.dropWhile(List(-1, -2, 4), minus) must_== List(4)
 }

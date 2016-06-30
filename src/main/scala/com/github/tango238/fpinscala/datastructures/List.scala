@@ -30,6 +30,8 @@ object List {
       }
 
   // 述語とマッチする場合に限り、Listからその要素までの要素を削除する
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = ???
+  def dropWhile[A](as: List[A], f: A => Boolean): List[A] = as match {
+    case Cons(x, xs) => if (f(x)) dropWhile(xs, f) else as
+  }
 
 }
