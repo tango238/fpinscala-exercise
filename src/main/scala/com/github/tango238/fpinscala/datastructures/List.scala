@@ -20,6 +20,12 @@ object List {
     case Cons(x, xs) => x * product(xs)
   }
 
+  // Exercise 3.2 Listの最初の要素を削除する
+  def tail[A](as: List[A]): List[A] = as match {
+    case Cons(x, xs) => xs
+    case Nil => Nil
+  }
+
   // リストの先頭から n 個の要素を削除する
   def drop[A](l: List[A], n: Int): List[A] =
     if (n <= 0) l
@@ -32,6 +38,7 @@ object List {
   // 述語とマッチする場合に限り、Listからその要素までの要素を削除する
   def dropWhile[A](as: List[A], f: A => Boolean): List[A] = as match {
     case Cons(x, xs) => if (f(x)) dropWhile(xs, f) else as
+    case Nil => Nil
   }
 
 }
