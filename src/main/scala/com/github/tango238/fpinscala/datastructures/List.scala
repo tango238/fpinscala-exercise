@@ -26,6 +26,12 @@ object List {
     case Nil => Nil
   }
 
+  // Exercise 3.3 Listの最初の要素を別の値と置き換える
+  def setHead[A](as: List[A], r: A): List[A] = as match {
+    case Cons(x, xs) => Cons(r, xs)
+    case Nil => Nil
+  }
+
   // リストの先頭から n 個の要素を削除する
   def drop[A](l: List[A], n: Int): List[A] =
     if (n <= 0) l
