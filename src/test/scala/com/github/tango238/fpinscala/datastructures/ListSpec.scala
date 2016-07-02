@@ -13,11 +13,13 @@ class ListSpec extends Specification { def is = s2"""
    (2 + 3 + 0) * 4 = 20                   $product5
    [1, 2, 3] drops 1 = [2, 3]             $drop1
    [1] drops 3 = Nil                      $drop2
-   [-1, -2, 4] dropWhile 'x < 0' = [4]    $dropWhile1
    tail of [1, 2, 3]  = [2,3]             $tail1
    tail of []  = []                       $tail2
    setHead  [1, 2, 3] with 9 = [9, 2, 3]  $setHead1
    setHead  [] with 9 = []                $setHead2
+   append [3,4] to [1,2] = [1,2,3,4]      $append1
+   [-1, -2, 4] dropWhile 'x < 0' = [4]    $dropWhile1
+   [-1, -2, 4] dropWhile 'x < 0' = [4]    $dropWhile2
   """
 
   def sum1 = List.sum(List(1, 2)) must_== 3
@@ -28,10 +30,11 @@ class ListSpec extends Specification { def is = s2"""
   def product5 = List.product(List(List.sum(List(2, 3, 0)), 4)) must_== 20
   def drop1 = List.drop(List(1, 2, 3), 1) must_== List(2, 3)
   def drop2 = List.drop(List(1), 3) must_== Nil
-  def minus(i: Int) = i < 0
-  def dropWhile1 = List.dropWhile(List(-1, -2, 4), minus) must_== List(4)
+  def dropWhile1 = List.dropWhile(List(-1, -2, 4), (i: Int) => i < 0) must_== List(4)
+  def dropWhile2 = List.dropWhile2(List(-1, -2, 4))(i => i < 0) must_== List(4)
   def tail1 = List.tail(List(1, 2, 3)) must_== List(2, 3)
   def tail2 = List.tail(List()) must_== List()
   def setHead1 = List.setHead(List(1, 2, 3), 9) must_== List(9, 2, 3)
   def setHead2 = List.setHead(List(), 9) must_== List()
+  def append1 = List.append(List(1,2), List(3,4)) must_== List(1,2,3,4)
 }

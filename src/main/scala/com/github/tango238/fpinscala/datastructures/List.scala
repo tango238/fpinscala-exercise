@@ -10,15 +10,22 @@ object List {
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
+  /*
   def sum(ints: List[Int]): Int = ints match {
     case Nil => 0
     case Cons(x, xs) => x + sum(xs)
   }
+  */
+  def sum(ints: List[Int]): Int = foldRight(ints, 0)((a, b) => a + b)
 
+  /*
   def product(ds: List[Double]): Double = ds match {
     case Nil => 1
+    case Cons(0.0, _) => 0
     case Cons(x, xs) => x * product(xs)
   }
+  */
+  def product(ds: List[Double]): Double = foldRight(ds, 1.0)((a, b) => a * b)
 
   // Exercise 3.2 Listの最初の要素を削除する
   def tail[A](as: List[A]): List[A] = as match {
@@ -32,7 +39,7 @@ object List {
     case Nil => Nil
   }
 
-  // リストの先頭から n 個の要素を削除する
+  // Exercise 3.4 リストの先頭から n 個の要素を削除する
   def drop[A](l: List[A], n: Int): List[A] =
     if (n <= 0) l
     else
@@ -41,10 +48,26 @@ object List {
         case Nil => Nil
       }
 
-  // 述語とマッチする場合に限り、Listからその要素までの要素を削除する
+  // Exercise 3.5 述語とマッチする場合に限り、Listからその要素までの要素を削除する
   def dropWhile[A](as: List[A], f: A => Boolean): List[A] = as match {
     case Cons(x, xs) => if (f(x)) dropWhile(xs, f) else as
     case Nil => Nil
   }
+
+  def dropWhile2[A](as: List[A])(f: A => Boolean): List[A] = as match {
+    case Cons(x, xs) => if (f(x)) dropWhile2(xs)(f) else as
+    case Nil => Nil
+  }
+
+  def append[A](as: List[A], l: List[A]): List[A] = as match {
+    case Nil => l
+    case Cons(x, xs) => Cons(x, append(xs, l))
+  }
+
+  def foldRight[A,B](as :List[A], z:B)(f: (A,B) => B): B = as match {
+    case Nil => z
+    case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+  }
+
 
 }
