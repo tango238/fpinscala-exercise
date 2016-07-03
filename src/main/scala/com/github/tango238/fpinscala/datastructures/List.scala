@@ -16,7 +16,7 @@ object List {
     case Cons(x, xs) => x + sum(xs)
   }
   */
-  def sum(ints: List[Int]): Int = foldRight(ints, 0)((a, b) => a + b)
+  def sum(ints: List[Int]): Int = foldLeft(ints, 0)(_ + _)
 
   /*
   def product(ds: List[Double]): Double = ds match {
@@ -25,7 +25,7 @@ object List {
     case Cons(x, xs) => x * product(xs)
   }
   */
-  def product(ds: List[Double]): Double = foldRight(ds, 1.0)((a, b) => a * b)
+  def product(ds: List[Double]): Double = foldLeft(ds, 1.0)(_ * _)
 
   // Exercise 3.2 Listの最初の要素を削除する
   def tail[A](as: List[A]): List[A] = as match {
@@ -71,7 +71,7 @@ object List {
 
   // Exercise 3.9 リストの長さを計算する
   def length[A](as: List[A]): Int = as match {
-    case Cons(x, xs) => foldRight(xs, 1)((a, b) => 1 + b)
+    case Cons(x, xs) => foldLeft(xs, 1)((b, a) => 1 + b)
     case Nil => 0
   }
 
@@ -89,7 +89,5 @@ object List {
       case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
       case Nil => z
   }
-
-
 
 }
