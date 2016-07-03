@@ -69,5 +69,10 @@ object List {
     case Cons(x, xs) => f(x, foldRight(xs, z)(f))
   }
 
+  // Exercise 3.9 リストの長さを計算する
+  def length[A](as: List[A]): Int = as match {
+    case Cons(x, xs) => foldRight(xs, 1)((a, b) => 1 + b)
+    case Nil => 0
+  }
 
 }
