@@ -23,6 +23,7 @@ class ListSpec extends Specification { def is = s2"""
    The length of [1, 2, 3] = 3            $length1
    The length of [] = 0                   $length2
    [1,2,3](_ + _) = 6                     $foldLeft1
+   Reverse of [1, 2, 3] = [3, 2, 1]       $reverse1
   """
 
   def sum1 = List.sum(List(1, 2)) must_== 3
@@ -43,4 +44,5 @@ class ListSpec extends Specification { def is = s2"""
   def length1 = List.length(List(1,2,3)) must_== 3
   def length2 = List.length(List()) must_== 0
   def foldLeft1 = List.foldLeft(List(1,2,3), 0)(_ + _) must_== 6
+  def reverse1 = List.reverse(List(1,2,3)) must_== List(3,2,1)
 }

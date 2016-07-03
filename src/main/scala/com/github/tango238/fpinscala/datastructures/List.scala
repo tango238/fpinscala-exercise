@@ -90,4 +90,7 @@ object List {
       case Nil => z
   }
 
+  // Exercise 3.12 要素が逆に並んだリストを返す
+  def reverse[A](as: List[A]): List[A] =  foldLeft(as, List[A]())((b,a) => Cons(a,b))
+
 }
