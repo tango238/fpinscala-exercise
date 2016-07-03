@@ -22,6 +22,7 @@ class ListSpec extends Specification { def is = s2"""
    [-1, -2, 4] dropWhile 'x < 0' = [4]    $dropWhile2
    The length of [1, 2, 3] = 3            $length1
    The length of [] = 0                   $length2
+   [1,2,3](_ + _) = 6                     $foldLeft1
   """
 
   def sum1 = List.sum(List(1, 2)) must_== 3
@@ -41,4 +42,5 @@ class ListSpec extends Specification { def is = s2"""
   def append1 = List.append(List(1,2), List(3,4)) must_== List(1,2,3,4)
   def length1 = List.length(List(1,2,3)) must_== 3
   def length2 = List.length(List()) must_== 0
+  def foldLeft1 = List.foldLeft(List(1,2,3), 0)(_ + _) must_== 6
 }

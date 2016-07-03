@@ -75,4 +75,21 @@ object List {
     case Nil => 0
   }
 
+  /**
+    * Exercise 3.10
+    *
+    * 1) foldLeft(Cons(1, Cons(2, Cons(3, Nil))), 0)( _ + _ )
+    * 2) foldLeft(Cons(2, Cons(3, Nil)))(0 + 1)
+    * 3) foldLeft(Cons(2, Cons(3, Nil)))(0 + 1)
+    * 4) foldLeft(Cons(3, Nil))(1 + 2)
+    * 5) Nil (3 + 3)
+    * 6) 6
+    */
+  def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+      case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+      case Nil => z
+  }
+
+
+
 }
