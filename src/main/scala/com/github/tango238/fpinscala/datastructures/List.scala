@@ -1,5 +1,7 @@
 package com.github.tango238.fpinscala.datastructures
 
+import scala.annotation.tailrec
+
 sealed trait List[+A]
 case object Nil extends List[Nothing]
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
@@ -59,11 +61,20 @@ object List {
     case Nil => Nil
   }
 
+  /*
   def append[A](as: List[A], l: List[A]): List[A] = as match {
     case Nil => l
     case Cons(x, xs) => Cons(x, append(xs, l))
   }
+  */
 
+  /**
+    * 1) foldRight(Cons(1, Cons(2, Cons(3, Nil))), 0)( _ + _ )
+    * 2) 1 + foldRight(Cons(2, Cons(3, Nil)), 0)
+    * 3) 1 + (2 + foldRight(Cons(3, Nil), 0))
+    * 4) 1 + (2 + (3 + 0))
+    * 5) 6
+    */
   def foldRight[A,B](as :List[A], z:B)(f: (A,B) => B): B = as match {
     case Nil => z
     case Cons(x, xs) => f(x, foldRight(xs, z)(f))
@@ -93,4 +104,12 @@ object List {
   // Exercise 3.12 要素が逆に並んだリストを返す
   def reverse[A](as: List[A]): List[A] =  foldLeft(as, List[A]())((b,a) => Cons(a,b))
 
+  // TODO: Exercise 3.13
+
+  // Exercise 3.14
+  def append[A](l: List[A], r: List[A]): List[A] = {
+    foldRight(l, r)(Cons(_, _))
+  }
+
+  // TODO: Exercise 3.15
 }
