@@ -112,4 +112,11 @@ object List {
   }
 
   // TODO: Exercise 3.15
+
+  // Exercise 3.16
+  // 整数型リストの各要素に1を足すを変換する
+  def addOne(l: List[Int]): List[Int] = {
+    foldRight(l, List[Int]())((a,b) => Cons(a+1,b))
+  }
+
 }
