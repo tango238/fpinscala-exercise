@@ -119,4 +119,8 @@ object List {
     foldRight(l, List[Int]())((a,b) => Cons(a+1,b))
   }
 
+  def stringify(as: List[Double]): List[String] = {
+    foldRight(as,List[String]())((a,b) => Cons(a.toString,b))
+  }
+
 }
