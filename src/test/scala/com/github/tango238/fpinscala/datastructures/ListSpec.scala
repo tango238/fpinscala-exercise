@@ -30,6 +30,7 @@ class ListSpec extends Specification { def is = s2"""
    map: [1,2,3]((a) => (a,a)) => [(1,1),(2,2),(3,3)] $map1
    filter: [1,2,3](_ > 1) => [2,3]           $filter1
    flatMap: [1,2,3]([_,_]) => [1,1,2,2,3,3]  $flatMap1
+   compose: [1,2,3][4,5,6] => [5,7,9]        $compose1
   """
 
   def sum1 = List.sum(List(1, 2)) must_== 3

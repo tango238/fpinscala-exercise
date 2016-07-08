@@ -3,7 +3,9 @@ package com.github.tango238.fpinscala.datastructures
 import scala.annotation.tailrec
 
 sealed trait List[+A]
+
 case object Nil extends List[Nothing]
+
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
 object List {
@@ -75,7 +77,7 @@ object List {
     * 4) 1 + (2 + (3 + 0))
     * 5) 6
     */
-  def foldRight[A,B](as :List[A], z:B)(f: (A,B) => B): B = as match {
+  def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = as match {
     case Nil => z
     case Cons(x, xs) => f(x, foldRight(xs, z)(f))
   }
@@ -96,13 +98,13 @@ object List {
     * 5) Nil (3 + 3)
     * 6) 6
     */
-  def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = as match {
-      case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
-      case Nil => z
+  def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = as match {
+    case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+    case Nil => z
   }
 
   // Exercise 3.12 要素が逆に並んだリストを返す
-  def reverse[A](as: List[A]): List[A] = foldLeft(as, List[A]())((b,a) => Cons(a,b))
+  def reverse[A](as: List[A]): List[A] = foldLeft(as, List[A]())((b, a) => Cons(a, b))
 
   // TODO: Exercise 3.13
 
@@ -116,34 +118,37 @@ object List {
   // Exercise 3.16
   // 整数型リストの各要素に1を足すを変換する
   def addOne(l: List[Int]): List[Int] = {
-    foldRight(l, List[Int]())((a,b) => Cons(a+1,b))
+    foldRight(l, List[Int]())((a, b) => Cons(a + 1, b))
   }
 
   // Exercise 3.17
   def stringify(as: List[Double]): List[String] = {
-    foldRight(as,List[String]())((a,b) => Cons(a.toString,b))
+    foldRight(as, List[String]())((a, b) => Cons(a.toString, b))
   }
 
   // Exercise 3.18
-  def map[A,B](as: List[A])(f: A => B): List[B] = {
-    foldRight(as,List[B]())((a,b) => Cons(f(a),b))
+  def map[A, B](as: List[A])(f: A => B): List[B] = {
+    foldRight(as, List[B]())((a, b) => Cons(f(a), b))
   }
 
   // Exercise 3.19
   def filter[A](as: List[A])(f: A => Boolean): List[A] = {
-    foldRight(as, List[A]())((a,b) => if(f(a)) Cons(a,b) else b)
+    foldRight(as, List[A]())((a, b) => if (f(a)) Cons(a, b) else b)
   }
 
   // Exercise 3.20
-  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] =  as match {
+  def flatMap[A, B](as: List[A])(f: A => List[B]): List[B] = as match {
     case Nil => Nil
     case Cons(x, xs) => List.append(f(x), flatMap(xs)(f))
   }
 
   // Exercise 3.22
-  def compose[Int](a1: List[Int], a2: List[Int]): List[Int] = ???
+  def compose(a1: List[Int], a2: List[Int]): List[Int] = (a1, a2) match {
+    case (Cons(x1, xs1), Cons(x2, xs2)) => Cons(x1 + x2, compose(xs1, xs2))
+    case (Nil, _) => Nil
+  }
 
   // Exercise 3.23
-  def zipWith[A](a1: List[A], a2: List[A])(f: (A,A) => A):List[A] = ???
+  def zipWith[A](a1: List[A], a2: List[A])(f: (A, A) => A): List[A] = ???
 
 }
