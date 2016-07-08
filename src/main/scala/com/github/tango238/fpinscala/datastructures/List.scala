@@ -135,7 +135,10 @@ object List {
   }
 
   // Exercise 3.20
-  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = ???
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] =  as match {
+    case Nil => Nil
+    case Cons(x, xs) => List.append(f(x), flatMap(xs)(f))
+  }
 
   // Exercise 3.22
   def compose[Int](a1: List[Int], a2: List[Int]): List[Int] = ???
