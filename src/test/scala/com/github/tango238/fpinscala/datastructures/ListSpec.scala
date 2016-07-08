@@ -31,6 +31,7 @@ class ListSpec extends Specification { def is = s2"""
    filter: [1,2,3](_ > 1) => [2,3]           $filter1
    flatMap: [1,2,3]([_,_]) => [1,1,2,2,3,3]  $flatMap1
    compose: [1,2,3][4,5,6] => [5,7,9]        $compose1
+   zipWith: [1,2,3][4,5,6](_*_) => [4,10,18] $zipWith1
   """
 
   def sum1 = List.sum(List(1, 2)) must_== 3

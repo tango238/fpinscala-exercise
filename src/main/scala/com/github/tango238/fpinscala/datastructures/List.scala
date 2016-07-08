@@ -149,6 +149,9 @@ object List {
   }
 
   // Exercise 3.23
-  def zipWith[A](a1: List[A], a2: List[A])(f: (A, A) => A): List[A] = ???
+  def zipWith[A](a1: List[A], a2: List[A])(f: (A, A) => A): List[A] = (a1, a2) match {
+    case (Cons(x1, xs1), Cons(x2, xs2)) => Cons(f(x1, x2), zipWith(xs1, xs2)(f))
+    case (Nil, _) => Nil
+  }
 
 }
