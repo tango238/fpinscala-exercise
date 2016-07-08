@@ -102,7 +102,7 @@ object List {
   }
 
   // Exercise 3.12 要素が逆に並んだリストを返す
-  def reverse[A](as: List[A]): List[A] =  foldLeft(as, List[A]())((b,a) => Cons(a,b))
+  def reverse[A](as: List[A]): List[A] = foldLeft(as, List[A]())((b,a) => Cons(a,b))
 
   // TODO: Exercise 3.13
 
@@ -133,5 +133,14 @@ object List {
   def filter[A](as: List[A])(f: A => Boolean): List[A] = {
     foldRight(as, List[A]())((a,b) => if(f(a)) Cons(a,b) else b)
   }
+
+  // Exercise 3.20
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = ???
+
+  // Exercise 3.22
+  def compose[Int](a1: List[Int], a2: List[Int]): List[Int] = ???
+
+  // Exercise 3.23
+  def zipWith[A](a1: List[A], a2: List[A])(f: (A,A) => A):List[A] = ???
 
 }

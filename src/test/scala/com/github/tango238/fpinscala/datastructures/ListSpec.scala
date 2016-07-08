@@ -55,4 +55,7 @@ class ListSpec extends Specification { def is = s2"""
   def stringify1 = List.stringify(List(1,2,3)) must_== List("1.0","2.0","3.0")
   def map1 = List.map(List(1,2,3))((a) => (a,a)) must_== List((1,1),(2,2),(3,3))
   def filter1 = List.filter(List(1,2,3))(_ > 1) must_== List(2,3)
+  def flatMap1 = List.flatMap(List(1,2,3))(i => List(i,i)) must_== List(1,1,2,2,3,3)
+  def compose1 = List.compose(List(1,2,3), List(4,5,6)) must_== List(5,7,9)
+  def zipWith1 = List.zipWith(List(1,2,3), List(4,5,6))(_ * _) must_== List(4,10,18)
 }
