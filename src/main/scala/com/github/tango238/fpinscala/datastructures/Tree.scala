@@ -4,12 +4,24 @@ sealed trait Tree[+A]
 case class Leaf[A](value: A) extends Tree[A]
 case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
-/**
-  * Branch(
-  *   Branch(Leaf("a"), Leaf("b")),
-  *   Branch(Leaf("c"), Leaf("d"))
-  * )
-  */
+object Tree {
 
-// Exercise 3.25
-// def size() = ???
+  def foldLeft[A,B](t: Tree[A], z:B)(f:(B,A) => B): B = t match {
+    case Branch(l,r) => foldLeft(r,foldLeft(l,z)(f))(f)
+    case Leaf(v) => f(z,v)
+  }
+
+  def foldRight[A,B](t: Tree[A], z:B)(f:(A,B) => B): B = t match {
+    case Branch(l,r) => foldRight(l,foldRight(r,z)(f))(f)
+    case Leaf(v) => f(v,z)
+  }
+
+  // Exercise 3.25
+  def size[A](t: Tree[A]):Int = t match {
+    case Branch(l,r) => 1 + size(l) + size(r)
+    case Leaf(v) => 1
+  }
+
+}
+
+
