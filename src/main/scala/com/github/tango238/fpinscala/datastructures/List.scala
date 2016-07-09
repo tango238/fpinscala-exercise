@@ -107,6 +107,7 @@ object List {
   def reverse[A](as: List[A]): List[A] = foldLeft(as, List[A]())((b, a) => Cons(a, b))
 
   // TODO: Exercise 3.13
+  // 難問: `foldRight` をベースとして `foldLeft` を記述することは可能か。またその逆はどうか。
 
   // Exercise 3.14
   def append[A](l: List[A], r: List[A]): List[A] = {
@@ -114,6 +115,8 @@ object List {
   }
 
   // TODO: Exercise 3.15
+  // 難問: 複数のリストからなるリストを1つのリストとして連結する関数を記述せよ
+
 
   // Exercise 3.16
   // 整数型リストの各要素に1を足すを変換する
@@ -153,5 +156,10 @@ object List {
     case (Cons(x1, xs1), Cons(x2, xs2)) => Cons(f(x1, x2), zipWith(xs1, xs2)(f))
     case (Nil, _) => Nil
   }
+
+  // TODO: Exercise 3.24
+  // 難問: List に別のListがサブシーケンスとして含まれているかどうかを調べる `hasSubsequence` を実装せよ
+  // List(1,2,3,4)には List(1,2)、List(2,3)、List(4)などがサブシーケンスとして含まれている
+  def hasSubsequence[A](sup: List[A], sub: List[A]): Boolean = ???
 
 }
