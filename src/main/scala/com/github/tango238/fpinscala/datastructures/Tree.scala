@@ -36,6 +36,12 @@ object Tree {
     case Leaf(v) => if (v == a) 1 else 0
   }
 
+  // Exercise 3.28
+  def map[A,B](t: Tree[A])(f: A => B): Tree[B] = t match {
+    case Branch(l,r) => Branch(map(l)(f), map(r)(f))
+    case Leaf(v) => Leaf(f(v))
+  }
+
 }
 
 

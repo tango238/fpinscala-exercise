@@ -28,6 +28,11 @@ class TreeTest extends Specification {
       Tree.depth(Branch(Branch(Leaf(1), Leaf(11)), Branch(Leaf(2), Branch(Leaf(7), Leaf(5)))), 11) must_== 3
       Tree.depth(Branch(Branch(Leaf(7), Leaf(11)), Branch(Leaf(2), Branch(Leaf(7), Leaf(5)))), 7) must_== 4
     }
+
+    "map" in {
+      Tree.map(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(5))))((a) => a+a) must_== Branch(Branch(Leaf(2), Leaf(4)), Branch(Leaf(6), Leaf(10)))
+      Tree.map(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(5))))((a) => a*a) must_== Branch(Branch(Leaf(1), Leaf(4)), Branch(Leaf(9), Leaf(25)))
+    }
   }
 }
 
