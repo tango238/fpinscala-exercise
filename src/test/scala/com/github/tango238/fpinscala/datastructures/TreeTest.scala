@@ -19,5 +19,10 @@ class TreeTest extends Specification {
     "size" in {
         Tree.size(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d")))) must_== 7
     }
+
+    "maximum" in {
+      Tree.maximum(Branch(Branch(Leaf(1), Leaf(11)), Branch(Leaf(2), Branch(Leaf(7), Leaf(5))))) must_== 11
+    }
   }
 }
+

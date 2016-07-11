@@ -22,6 +22,15 @@ object Tree {
     case Leaf(v) => 1
   }
 
+  def maximum(t: Tree[Int]): Int = t match {
+    case Branch(l,r) => {
+      val maxl = maximum(l)
+      val maxr = maximum(r)
+      if (maxl > maxr) maxl else maxr
+    }
+    case Leaf(v) => v
+  }
+
 }
 
 
