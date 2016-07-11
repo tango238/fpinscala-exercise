@@ -1,5 +1,7 @@
 package com.github.tango238.fpinscala.datastructures
 
+import Math.max
+
 sealed trait Tree[+A]
 case class Leaf[A](value: A) extends Tree[A]
 case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
@@ -22,13 +24,16 @@ object Tree {
     case Leaf(v) => 1
   }
 
+  // Exercise 3.26
   def maximum(t: Tree[Int]): Int = t match {
-    case Branch(l,r) => {
-      val maxl = maximum(l)
-      val maxr = maximum(r)
-      if (maxl > maxr) maxl else maxr
-    }
+    case Branch(l,r) => max(maximum(l), maximum(r))
     case Leaf(v) => v
+  }
+
+  // Exercise 3.27
+  def depth[A](t: Tree[A], a:A): Int = t match {
+    case Branch(l,r) => max(1 + depth(l,a), 1 + depth(r,a))
+    case Leaf(v) => if (v == a) 1 else 0
   }
 
 }

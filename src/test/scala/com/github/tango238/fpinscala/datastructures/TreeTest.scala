@@ -23,6 +23,11 @@ class TreeTest extends Specification {
     "maximum" in {
       Tree.maximum(Branch(Branch(Leaf(1), Leaf(11)), Branch(Leaf(2), Branch(Leaf(7), Leaf(5))))) must_== 11
     }
+
+    "depth" in {
+      Tree.depth(Branch(Branch(Leaf(1), Leaf(11)), Branch(Leaf(2), Branch(Leaf(7), Leaf(5)))), 11) must_== 3
+      Tree.depth(Branch(Branch(Leaf(7), Leaf(11)), Branch(Leaf(2), Branch(Leaf(7), Leaf(5)))), 7) must_== 4
+    }
   }
 }
 
