@@ -2,7 +2,7 @@ package com.github.tango238.fpinscala.datastructures
 
 import org.specs2.mutable.Specification
 
-class TreeTest extends Specification {
+class TreeSpec extends Specification {
 
   "TreeTest" should {
     "foldLeft" in {
