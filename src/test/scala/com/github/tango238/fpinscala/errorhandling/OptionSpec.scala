@@ -5,25 +5,21 @@ import org.specs2.mutable.Specification
 class OptionSpec extends Specification {
 
   "OptionSpec" should {
+    "map" in {
+      Some(1).map(_ * 2) must_== Some(2)
+    }
     "flatMap" in {
       ok
     }
-
-    "filter" in {
-      ok
-    }
-
     "getOrElse" in {
-      ok
+      Some("a").getOrElse("b") must_== "a"
+      None.getOrElse("b") must_== "b"
     }
-
     "orElse" in {
       ok
     }
-
-    "map" in {
+    "filter" in {
       ok
     }
-
   }
 }
