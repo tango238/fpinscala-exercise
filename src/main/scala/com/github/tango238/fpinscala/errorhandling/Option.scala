@@ -7,10 +7,14 @@ sealed trait Option[+A] {
     case None => None
   }
 
+  /*
   def flatMap[B](f: A => Option[B]): Option[B] = this match {
     case Some(a) => f(a)
     case None => None
   }
+  */
+  def flatMap[B](f: A => Option[B]): Option[B] = map (f) getOrElse None
+
 
   def getOrElse[B >: A](default: => B): B = this match {
     case Some(a) => a
@@ -18,15 +22,21 @@ sealed trait Option[+A] {
   }
 
   // Noneだったら、指定したデフォルトのOption型を返す。SomeだったらそのままそのSomeを返す
+  /*
   def orElse[B >: A](ob: => Option[B]): Option[B] = this match {
     case Some(a) => this
     case None => None
   }
+  */
+  def orElse[B >: A](ob: => Option[B]): Option[B] = map (Some(_)) getOrElse ob
 
+  /*
   def filter(f: A => Boolean): Option[A] = this match {
     case Some(a) if f(a) => this
     case _ => None
   }
+  */
+  def filter(f: A => Boolean): Option[A] = flatMap(a => if(f(a)) Some(a) else None)
 
 }
 
