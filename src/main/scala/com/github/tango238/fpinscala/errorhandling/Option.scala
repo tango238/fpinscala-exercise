@@ -44,3 +44,21 @@ case class Some[+A](get: A) extends Option[A]
 
 case object None extends Option[Nothing]
 
+
+object Option {
+
+  // Exercise 4.2
+  // flatMapをベースとして variance 関数を実装せよ
+  // シーケンスの平均を m、シーケンスの各要素を x とすれば、分散は math.pow(x - m, 2) の平均となる
+  def variance(xs: Seq[Double]): Option[Double] = {
+    val m = mean(xs)
+    m flatMap(m => {
+      mean(xs.map(x => math.pow(x - m , 2)))
+    })
+  }
+
+  def mean(xs: Seq[Double]): Option[Double] =
+    if (xs.isEmpty) None
+    else Some(xs.sum / xs.length)
+
+}

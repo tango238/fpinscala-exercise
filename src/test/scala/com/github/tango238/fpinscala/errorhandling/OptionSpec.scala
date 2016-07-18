@@ -23,5 +23,10 @@ class OptionSpec extends Specification {
       Some(10).filter(a => a > 0) must_== Some(10)
       Some(10).filter(a => a > 10) must_== None
     }
+
+    "variance" in {
+      // m = 2.5, (2.25 + 0.25 + 0.25 + 2.25) / 4 = 1.25
+      Option.variance(Seq(1.0,2.0,3.0,4.0)) must_== Some(1.25)
+    }
   }
 }
