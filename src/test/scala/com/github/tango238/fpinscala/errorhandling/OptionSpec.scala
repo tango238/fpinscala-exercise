@@ -28,5 +28,17 @@ class OptionSpec extends Specification {
       // m = 2.5, (2.25 + 0.25 + 0.25 + 2.25) / 4 = 1.25
       Option.variance(Seq(1.0,2.0,3.0,4.0)) must_== Some(1.25)
     }
+
+    "map2" in {
+      Option.map2(Some(1), Some(2))((a,b) => a + b) must_== Some(3)
+      Option.map2(None, Some(2))((a,b) => b) must_== None
+      Option.map2(Some(1), None)((a,b) => a) must_== None
+    }
+
+    "map2_2" in {
+      Option.map2_2(Some(1), Some(2))((a, b) => a + b) must_== Some(3)
+      Option.map2_2(None, Some(2))((a, b) => b) must_== None
+      Option.map2_2(Some(1), None)((a, b) => a) must_== None
+    }
   }
 }

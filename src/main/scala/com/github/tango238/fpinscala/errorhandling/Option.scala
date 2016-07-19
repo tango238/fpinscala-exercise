@@ -58,4 +58,14 @@ object Option {
     if (xs.isEmpty) None
     else Some(xs.sum / xs.length)
 
+  // Exercise 4.3
+  // 2項関数を使って Option 型の２つの値を結合する総称関数
+  // どちらかの Option 値が None の場合は返り値も None になる
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A,B) => C):Option[C] = a flatMap(x => b map(y => f(x,y)))
+
+  def map2_2[A,B,C](a: Option[A], b: Option[B])(f: (A,B) => C):Option[C] =
+    for {
+      x <- a
+      y <- b
+    } yield f(x,y)
 }
