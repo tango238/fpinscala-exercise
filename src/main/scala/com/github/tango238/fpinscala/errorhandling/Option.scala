@@ -68,4 +68,12 @@ object Option {
       x <- a
       y <- b
     } yield f(x,y)
+
+  // Exercise 4.4
+  // Option のリストを1つの Option にまとめる sequence 関数を記述せよ
+  // 新しい Option には、元のリストに含まれているすべての Some 値のリストが含まれる
+  // 元のリストに None が1つでも含まれていた場合、この関数の結果は None になる
+  // それ以外はすべての値のリストを含んだ Some になる
+  def sequence[A](a: List[Option[A]]): Option[List[A]] = ???
+
 }
