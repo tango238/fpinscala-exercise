@@ -40,5 +40,10 @@ class OptionSpec extends Specification {
       Option.map2_2(None, Some(2))((a, b) => b) must_== None
       Option.map2_2(Some(1), None)((a, b) => a) must_== None
     }
+
+    "sequence" in {
+      Option.sequence(List(Some(1),Some(2),Some(3))) must_== Some(List(1,2,3))
+      Option.sequence(List(Some(1),None,Some(3))) must_== None
+    }
   }
 }
