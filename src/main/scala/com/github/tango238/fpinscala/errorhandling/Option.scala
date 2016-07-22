@@ -61,7 +61,8 @@ object Option {
   // Exercise 4.3
   // 2項関数を使って Option 型の２つの値を結合する総称関数
   // どちらかの Option 値が None の場合は返り値も None になる
-  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = a flatMap (x => b map (y => f(x, y)))
+  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+    a flatMap (x => b map (y => f(x, y)))
 
   def map2_2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
     for {
@@ -82,5 +83,23 @@ object Option {
         tt <- sequence(t)
       } yield hh :: tt
   }
+
+  def Try[A](a: => A): Option[A] =
+    try Some(a)
+    catch { case e: Exception => None }
+
+  def parseInts(a: List[String]): Option[List[Int]] =
+    sequence(a map (i => Try(i.toInt)))
+
+  // Exercise 4.5
+  // The `traverse` function can be written with explicit recursion or use `foldRight` to do the recursion for you.
+  // Implementing `sequence` using `traverse` may be more trivial than you think.
+  def traverse[A,B](a: List[A])(f: A => Option[B]): Option[List[B]] =
+    a match {
+      case Nil => Some(Nil)
+      case h :: t => map2(f(h), traverse(t)(f))(_ :: _)
+    }
+
+    // sequence(a map (x => f(x)))
 
 }

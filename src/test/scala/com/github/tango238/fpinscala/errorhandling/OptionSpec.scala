@@ -45,5 +45,9 @@ class OptionSpec extends Specification {
       Option.sequence(List(Some(1),Some(2),Some(3))) must_== Some(List(1,2,3))
       Option.sequence(List(Some(1),None,Some(3))) must_== None
     }
+
+    "traverse" in {
+      Option.traverse(List("1","2","3"))(a => Some(a.toInt)) must_== Some(List(1,2,3))
+    }
   }
 }
