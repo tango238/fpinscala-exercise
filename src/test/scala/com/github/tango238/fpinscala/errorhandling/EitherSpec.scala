@@ -22,6 +22,5 @@ class EitherSpec extends Specification {
       ok
     }
 
-
   }
 }
