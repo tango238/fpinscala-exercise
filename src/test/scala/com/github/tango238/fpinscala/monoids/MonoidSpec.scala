@@ -10,9 +10,36 @@ class MonoidSpec extends Specification {
       val m = Monoid.intAddition
       val (x, y, z) = (1, 2, 3)
 
-      m.op(m.op(x, y), z) must_== 6
-      m.op(m.zero, x) must_== 1
+      m.op(m.op(x, y), z) must_== m.op(x, m.op(y, z))
+      m.op(m.zero, x) must_== x
+      m.op(x, m.zero) must_== x
     }
 
+    "intMultiplication" in {
+      val m = Monoid.intMultiplication
+      val (x, y, z) = (2, 3, 4)
+
+      m.op(m.op(x, y), z) must_== m.op(x, m.op(y, z))
+      m.op(m.zero, x) must_== x
+      m.op(x, m.zero) must_== x
+    }
+
+    "booleanOr" in {
+      val m = Monoid.booleanOr
+      val (x, y, z) = (true, false, true)
+
+      m.op(m.op(x, y), z) must_== m.op(x, m.op(y, z))
+      m.op(m.zero, x) must_== x
+      m.op(x, m.zero) must_== x
+    }
+
+    "booleanAnd" in {
+      val m = Monoid.booleanAnd
+      val (x, y, z) = (true, false, true)
+
+      m.op(m.op(x, y), z) must_== m.op(x, m.op(y, z))
+      m.op(m.zero, x) must_== x
+      m.op(x, m.zero) must_== x
+    }
   }
 }
