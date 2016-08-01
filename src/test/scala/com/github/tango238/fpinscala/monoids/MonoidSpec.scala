@@ -41,5 +41,23 @@ class MonoidSpec extends Specification {
       m.op(m.zero, x) must_== x
       m.op(x, m.zero) must_== x
     }
+
+    "listMonoid" in {
+      val m = Monoid.listMonoid[Int]
+      val (x, y, z) = (List(1), List(2), List(3))
+
+      m.op(m.op(x, y), z) must_== m.op(x, m.op(y, z))
+      m.op(m.zero, x) must_== x
+      m.op(x, m.zero) must_== x
+    }
+
+    "optionMonoid" in {
+      val m = Monoid.optionMonoid[String]
+      val (x, y, z) = (Some("a"), Some("b"), Some("c"))
+
+      m.op(m.op(x, y), z) must_== m.op(x, m.op(y, z))
+      m.op(m.zero, x) must_== x
+      m.op(x, m.zero) must_== x
+    }
   }
 }
